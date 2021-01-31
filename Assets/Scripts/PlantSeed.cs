@@ -68,10 +68,38 @@ public class PlantSeed : MonoBehaviour
     public UnityEvent combo1Done;
     public UnityEvent combo2Done;
 
+    public bool comboInt1Done = false;
+    public bool comboInt2Done = false;
+
     void Update()
     {
         comboInt1 = seed1+seed2+seed3+seed4;
         comboInt2 = seed5+seed6+seed7+seed8;
+        Combo();
+    }
+
+    public void Combo()
+    {
+        if(comboInt1Done == false)
+        {
+            if(comboInt1 == 10)
+            {
+                Debug.Log("Combo1Done");
+                combo1Done.Invoke();
+                comboInt1Done = true;
+            }
+        }
+
+        if(comboInt2Done == false)
+        {
+            if (comboInt2 == 26)
+            {
+                Debug.Log("Combo2Done");
+                combo2Done.Invoke();
+                comboInt2Done = true;
+            } 
+        }                           
+       
     }
 
     void OnTriggerEnter(Collider seed)
@@ -191,19 +219,4 @@ public class PlantSeed : MonoBehaviour
             seed8MusicStop.Invoke();
         }  
     } 
-
-    public void Combo()
-    {
-        if(comboInt1 == 10)
-        {
-            Debug.Log("Combo1Done");
-            combo1Done.Invoke();
-        }
-                                   
-        if (comboInt2 == 26)
-        {
-            Debug.Log("Combo2Done");
-            combo2Done.Invoke();
-        }  
-    }
 }
