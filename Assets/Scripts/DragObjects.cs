@@ -6,7 +6,7 @@ public class DragObjects : MonoBehaviour
 {
     private Vector3 offset; 
     private float ZCoord;
-    
+    /*
     void OnMouseDown()
     {
         zCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
@@ -23,6 +23,6 @@ public class DragObjects : MonoBehaviour
     
     void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPos() = offset;
-    }
+        transform.position = GetMouseWorldPos() = +offset;
+    }*/
 }
