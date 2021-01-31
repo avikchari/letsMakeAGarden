@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeedCard : MonoBehaviour
+public class CardPosition : MonoBehaviour
 {
-    public [] GameObject seedPosition;
-        public bool isThereASeed;
-
+    
     // Start is called before the first frame update
     void Start()
     {
