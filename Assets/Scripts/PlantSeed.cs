@@ -37,6 +37,9 @@ public class PlantSeed : MonoBehaviour
     public UnityEvent seed8MusicStop;
     public bool seed8In = false;
 
+    public UnityEvent combo1Done;
+    public UnityEvent combo2Done;
+
 
     void OnTriggerEnter(Collider seed)
     {
@@ -44,8 +47,7 @@ public class PlantSeed : MonoBehaviour
         {
             Debug.Log("Seed1Play!");
             seed1MusicPlay.Invoke();
-            seed1In = true;
-            
+            seed1In = true;   
         }
 
         else if(seed.tag == "Seed2")
@@ -158,9 +160,20 @@ public class PlantSeed : MonoBehaviour
         }  
     } 
 
-   /*  public void Combo()
+    public void Combo()
     {
-        if (seed1In = true | seed2In = true | seed3In = true | seed 4In = true
-    }  */
+        if ((seed1In == true) && (seed2In == true) && (seed3In == true) && (seed4In == true))
+        {
+            Debug.Log("Combo1Done");
+            combo1Done.Invoke();
+        }
+
+        if (seed5In == true && seed6In == true && seed7In == true && seed8In == true)
+        {
+            Debug.Log("Combo2Done");
+            combo2Done.Invoke();
+        }
+
+    }
 
 }
