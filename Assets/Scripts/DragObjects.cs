@@ -1,72 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
-[RequireComponent(typeof(Collider))]
 
 public class DragObjects : MonoBehaviour
 {
-
-    float ZPosition;
-    Vector3 Offset;
-    bool Dragging;
-
-    public Camera mainCamera;
-    [SerializeField]
-    public UnityEvent OnBeginDrag;
-    [SerializeField]
-    public UnityEvent OnEndDrag;
-
-    void Start()
-    {
-        mainCamera = Camera.main;
-        ZPosition = mainCamera.WorldToScreenPoint(transform.position).z;
-        //z axis of the game object
-    }
-
-    void Update()
-    {
-        if(Dragging) 
-        {
-            Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, ZPosition);
-            transform.position = mainCamera.ScreenToWorldPoint(position + new Vector3(Offset.x, Offset.y));
-
-        }
-    }
+    private Vector3 offset; 
+    private float ZCoord;
+    /*
     void OnMouseDown()
     {
-        if(!Dragging)
-        {
-            BeginDrag();
-        }
+        zCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
+        offset = gameObject.transform.position - GetMouseWorldPos();
     }
 
-    void OnMouseUp()
+    private Vector3 GetMouseWorldPos()
     {
-        EndDrag();
-    }
+        Vector3 mousePoint = Input.mousePosition;
 
-    public void BeginDrag()
+        mousePoint.z = ZCoord;
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+    }
+    
+    void OnMouseDrag()
     {
-        OnBeginDrag.Invoke();
-        Dragging = true;
-        Offset = mainCamera.WorldToScreenPoint(transform.position) - Input.mousePosition;
-    }
-
-    public void EndDrag()
-    {
-        OnEndDrag.Invoke();
-        Dragging = false;
-    }
-
-  /*  void OnMouseDrag()
-   {
-       Vector3 ScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance); //adds z axis to screen point
-
-       Vector3 NewWorldPosition = mainCamera.ScreenToWorldPoint(ScreenPosition); //screen point converted to world point
-
-       transform.position = NewWorldPosition;
-   }  */
-  
+        transform.position = GetMouseWorldPos() = +offset;
+    }*/
 }

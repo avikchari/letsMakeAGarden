@@ -3,7 +3,12 @@ guid: 46056b57679661a4b83dc6b5c05ef359
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dryBamboo2
+    second: {fileID: 2100000, guid: 0abdeaabf5892a04e88457cf985c7a84, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
