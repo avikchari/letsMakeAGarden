@@ -1,28 +1,72 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+[RequireComponent(typeof(Collider))]
 
 public class DragObjects : MonoBehaviour
 {
-    private Vector3 offset; 
-    private float ZCoord;
-    
+
+    float ZPosition;
+    Vector3 Offset;
+    bool Dragging;
+
+    public Camera mainCamera;
+    [SerializeField]
+    public UnityEvent OnBeginDrag;
+    [SerializeField]
+    public UnityEvent OnEndDrag;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+        ZPosition = mainCamera.WorldToScreenPoint(transform.position).z;
+        //z axis of the game object
+    }
+
+    void Update()
+    {
+        if(Dragging) 
+        {
+            Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, ZPosition);
+            transform.position = mainCamera.ScreenToWorldPoint(position + new Vector3(Offset.x, Offset.y));
+
+        }
+    }
     void OnMouseDown()
     {
-        zCoord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
-        offset = gameObject.transform.position - GetMouseWorldPos();
+        if(!Dragging)
+        {
+            BeginDrag();
+        }
     }
 
-    private Vector3 GetMouseWorldPos()
+    void OnMouseUp()
     {
-        Vector3 mousePoint = Input.mousePosition;
+        EndDrag();
+    }
 
-        mousePoint.z = ZCoord;
-        return Camera.main.ScreenToWorldPoint(mousePoint);
-    }
-    
-    void OnMouseDrag()
+    public void BeginDrag()
     {
-        transform.position = GetMouseWorldPos() = offset;
+        OnBeginDrag.Invoke();
+        Dragging = true;
+        Offset = mainCamera.WorldToScreenPoint(transform.position) - Input.mousePosition;
     }
+
+    public void EndDrag()
+    {
+        OnEndDrag.Invoke();
+        Dragging = false;
+    }
+
+  /*  void OnMouseDrag()
+   {
+       Vector3 ScreenPosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, CameraZDistance); //adds z axis to screen point
+
+       Vector3 NewWorldPosition = mainCamera.ScreenToWorldPoint(ScreenPosition); //screen point converted to world point
+
+       transform.position = NewWorldPosition;
+   }  */
+  
 }
